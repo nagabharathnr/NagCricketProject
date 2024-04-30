@@ -113,7 +113,7 @@ if __name__ == '__main__':
     batting_df.write.format("jdbc") \
         .mode("overwrite") \
         .option("url", "jdbc:postgresql://ec2-3-9-191-104.eu-west-2.compute.amazonaws.com:5432/testdb") \
-        .option("dbtable", "nag_batting_full") \
+        .option("dbtable", "nag_batting_fullLoad") \
         .option("driver", "org.postgresql.Driver") \
         .option("user", "consultants") \
         .option("password", "WelcomeItc@2022") \
@@ -124,15 +124,15 @@ if __name__ == '__main__':
     summary_df.write.format("jdbc") \
         .mode("overwrite") \
         .option("url", "jdbc:postgresql://ec2-3-9-191-104.eu-west-2.compute.amazonaws.com:5432/testdb") \
-        .option("dbtable", "nag_summary_full") \
+        .option("dbtable", "nag_summary_fullLoad") \
         .option("driver", "org.postgresql.Driver") \
         .option("user", "consultants") \
         .option("password", "WelcomeItc@2022") \
         .save()
 
     # writing it to hive
-    batting_df.write.mode("overwrite").option("header", True).saveAsTable("ukusmar.nag_batting_full_table")
-    summary_df.write.mode("overwrite").option("header", True).saveAsTable("ukusmar.nag_summary_full_table")
+    batting_df.write.mode("overwrite").option("header", True).saveAsTable("ukusmar.nag_batting_fullLoad_table")
+    summary_df.write.mode("overwrite").option("header", True).saveAsTable("ukusmar.nag_summary_fullLoad_table")
 
     # Final actions
     home_away_avg_df.show()
